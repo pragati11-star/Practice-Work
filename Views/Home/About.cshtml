@@ -1,0 +1,120 @@
+﻿@model NewProject1.Models.tblLogin1
+@{
+    ViewBag.Title = "About";
+}
+<h2>@ViewBag.Title.</h2>
+<h3>@ViewBag.Message</h3>
+<style>
+    .text-danger {
+        color: red;
+        font-weight: bold;
+    }
+</style>
+
+<div class="row">
+    <div class="col-md-6">
+        @using (Html.BeginForm("About", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.HiddenFor(m => m.Id)
+
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Please enter the Email" })
+            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+
+            @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @placeholder = "Please enter the Password" })
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+
+            
+            @Html.TextBoxFor(m => m.Image, new { @class = "form-control", @type = "file", @placeholder = "Please upload the Picture" })
+            @Html.ValidationMessageFor(m => m.Image, "", new { @class = "text-danger" })
+
+
+
+            @Html.ValidationSummary(true)
+            <input type="submit" css="btn" />
+        }
+
+    </div>
+    <div class=" row">
+        <div class="col-md-10">
+            <table class="table-bordered">
+                <thead>
+                    <tr>
+                        <td>
+                            Id
+                        </td>
+                        <td>
+                            Email
+                        </td>
+                        <td>
+                            Password
+                        </td>
+                        <td>
+                            Role
+                        </td>
+                        <td>
+                            IsActive
+                        </td>
+                        <td>
+                            U_Type
+                        </td>
+                        <td>
+                            c_date
+                        </td>
+                        <td>
+                            u_date
+                        </td>
+                        <td>
+                            image
+                        </td>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.List)
+                    {
+                    <tr>
+                        <td>
+                            @item.Id
+                        </td>
+                        <td>
+                            @item.Email
+                        </td>
+                        <td>
+                            @item.Password
+                        </td>
+                        <td>
+                            @item.Role
+                        </td>
+                        <td>
+                            @item.IsActive
+                        </td>
+                        <td>
+                            @item.U_Type
+                        </td>
+                        <td>
+                            @item.c_date
+                        </td>
+                        <td>
+                            @item.u_date
+                        </td>
+                        <td>
+
+                            <img src="/img/@item.image " style="width:100;" / >
+                        </td>
+                       
+                        <td>
+                            @Html.ActionLink("Edit", "About", new { id = item.Id }) |
+                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                            @Html.ActionLink("Delete", "DeleteAbout", new { id = item.Id })
+                            <a href="/Home/DeleteAbout?id=@item.Id">Del</a>
+                        </td>
+
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <p>Use this area to provide additional information.</p>

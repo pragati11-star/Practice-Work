@@ -1,0 +1,107 @@
+﻿@model NewProject1.Models.chef
+
+@{
+    ViewBag.Title = "Chef";
+}
+
+<h2>Chef</h2>
+<style>
+    .text-danger {
+        color: red;
+        font-weight: bold;
+    }
+</style>
+
+
+<div class="col-md-6">
+    @using (Html.BeginForm("Chef", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        @Html.HiddenFor(m => m.Id)
+
+        @*@Html.TextBoxFor(m => m.ApprovedId, new { @class = "form-control", @placeholder = "Please enter the Name" })
+            @Html.ValidationMessageFor(m => m.ApprovedId)*@
+
+        @Html.TextBoxFor(m => m.ChefName, new { @class = "form-control", @placeholder = "Please enter the name" })
+        @Html.ValidationMessageFor(m => m.ChefName, "", new { @class = "text-danger" })
+
+        @Html.TextBoxFor(m => m.MobileNo, new { @class = "form-control", @placeholder = "Please enter the mobile no." })
+        @Html.ValidationMessageFor(m => m.MobileNo)
+
+        @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Please enter the email" })
+        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+
+        @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @placeholder = "Please enter the password" })
+        @Html.ValidationMessageFor(m => m.Password)
+
+        @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @placeholder = "please enter the address" })
+        @Html.ValidationMessageFor(m => m.Address, "", new { @class = "text-dander" })
+
+        @Html.TextBoxFor(m => m.Gender, new { @class = "form-control", @placeholder = "please enter the gender" })
+        @Html.ValidationMessageFor(m => m.Gender, "", new { @class = "text-danger" })
+
+        @Html.TextBoxFor(m => m.image, new { @class = "form-control", @type = "file", @placeholder = "Please upload the Picture" })
+        @Html.ValidationMessageFor(m => m.image, "", new { @class = "text-danger" })
+
+
+
+
+        @Html.ValidationSummary(true)
+        <input type="submit" css="btn" />
+    }
+
+    <p>
+        @Html.ActionLink("Create New", "Create")
+    </p>
+    <table class="table">
+        <tr>
+            <th>
+                ChefName
+            </th>
+            <th>
+                MobileNo
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Password
+            </th>
+            <th>
+                Address
+            </th>
+            <th>
+                Gender
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in ViewBag.list)
+        {
+            <tr>
+                <td>
+                    @item.ChefName
+                </td>
+                <td>
+                    @item.MobileNo
+                </td>
+                <td>
+                    @item.Email
+                </td>
+                <td>
+                    @item.Password
+                </td>
+                <td>
+                    @item.Address
+                </td>
+                <td>
+                    @item.Gender
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Chef", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "DeleteChef", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>

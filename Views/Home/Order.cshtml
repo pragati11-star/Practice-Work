@@ -1,0 +1,81 @@
+﻿@model NewProject1.Models.PlacdOrder
+
+@{
+    ViewBag.Title = "Order";
+}
+<div class="row">
+    <div class="col-md-6">
+        @using (Html.BeginForm("Order", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.HiddenFor(m => m.Id)
+
+            @*@Html.TextBoxFor(m => m.ApprovedId, new { @class = "form-control", @placeholder = "Please enter the Name" })
+            @Html.ValidationMessageFor(m => m.ApprovedId)*@
+
+            @Html.TextBoxFor(m => m.DeliveryAddress, new { @class = "form-control", @placeholder = "Please enter the Address" })
+            @Html.ValidationMessageFor(m => m.DeliveryAddress)
+
+            @Html.TextBoxFor(m => m.Price, new { @class = "form-control", @placeholder = "Please enter the Email" })
+            @Html.ValidationMessageFor(m => m.Price)
+
+            @Html.TextBoxFor(m => m.OrderTime, new { @class = "form-control", @placeholder = "Please enter the Password" })
+            @Html.ValidationMessageFor(m => m.OrderTime)
+
+            @Html.ValidationSummary(true)
+            <input type="submit" css="btn" />
+        }
+
+    </div>
+
+
+        <div class="col-md-10">
+            <table style="width:100%;" class="table-bordered">
+                <thead>
+                    <tr>
+                        <td>
+                            Id
+                        </td>
+                        <td>
+                            Approved Id
+                        </td>
+                        <td>
+                            Order Time
+                        </td>
+                        <td>
+                            Delivery Address
+                        </td>
+                        <td>
+                            price
+                        </td>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in ViewBag.List)
+                    {
+                        <tr>
+                            <td>
+                                @item.Id
+                            </td>
+                            <td>
+                                @item.ApprovedId
+                            </td>
+                            <td>
+                                @item.OrderTime
+                            </td>
+                            <td>
+                                @item.DeliveryAddresss
+                            </td>
+                            <td>
+                                @item.Price
+                            </td>
+
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
